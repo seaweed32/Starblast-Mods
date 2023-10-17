@@ -29,24 +29,19 @@ this.tick = function(game) {
 this.event = function(event, game) {
   switch (event.name) {
     case "ship_spawned":
-      //setTimeout( () => {
-        event.ship.set({idle:true});
-        for(let i=0;i<Math.round(100/pixelSize)*(100/pixelSize)+1;i++){
-          event.ship.setUIComponent({
-            id:`box_${i}`,
-            position:[xPos,yPos,pixelSize,pixelSize],
-            visible: true,
-            components: [
-              { type:  "box",position:[0,0,100,100],fill:"rgba(255, 0, 0, 1)",stroke:"rgba(0, 255, 0, 1)",width:10},
-            ]
-          });
-          posCalc(i);
-        }
-      //}, 40);
-      break;
-    case "ui_component_clicked":
-      
-      break;
+      event.ship.set({idle:true});
+      for(let i=0;i<Math.round(100/pixelSize)*(100/pixelSize)+1;i++){
+        event.ship.setUIComponent({
+          id:`box_${i}`,
+          position:[xPos,yPos,pixelSize,pixelSize],
+          visible: true,
+          components: [
+            { type:  "box",position:[0,0,100,100],fill:"rgba(255, 0, 0, 1)",stroke:"rgba(0, 255, 0, 1)",width:10},
+          ]
+        });
+        posCalc(i);
+      }
+    break;
   }
 };
 
@@ -59,4 +54,3 @@ function posCalc(i){
     xPos += pixelSize;
   }
 }
-
