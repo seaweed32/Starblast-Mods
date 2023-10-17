@@ -1,4 +1,5 @@
-const pixelSize = 4; //in percentage of height
+const pixelSize = 5; //in percentage of height
+const loopNum = 100; //the number of times it loops per tick
 
 let yPos = 0;
 let xPos = 0;
@@ -13,7 +14,7 @@ this.options = {
   
 
 this.tick = function(game) {
-  for(let i=0;i<100;i++){
+  for(let i=0;i<loopNum;i++){
     for(let ship of game.ships){
       ship.setUIComponent({
         id: `box_${Math.floor(Math.random()*(Math.round(100/pixelSize)*(100/pixelSize)+2))}`,
