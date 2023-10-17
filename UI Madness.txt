@@ -1,0 +1,62 @@
+const pixelSize = 4; //in percentage of height
+
+let yPos = 0;
+let xPos = 0;
+
+let xNum = Math.round(100/pixelSize);
+
+this.options = {
+  root_mode: "",
+  map_size: 30,
+  map_name: "UI component madness",
+};
+  
+
+this.tick = function(game) {
+  for(let i=0;i<100;i++){
+    for(let ship of game.ships){
+      ship.setUIComponent({
+        id: `box_${Math.floor(Math.random()*(Math.round(100/pixelSize)*(100/pixelSize)+2))}`,
+        components: [
+          { type:  "box",position:[0,0,100,100],fill:`rgba(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, 1)`,stroke:`rgba(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, 1)`,width:10},
+        ]
+      });
+    }
+  }
+};
+
+
+this.event = function(event, game) {
+  switch (event.name) {
+    case "ship_spawned":
+      //setTimeout( () => {
+        event.ship.set({idle:true});
+        for(let i=0;i<Math.round(100/pixelSize)*(100/pixelSize)+1;i++){
+          event.ship.setUIComponent({
+            id:`box_${i}`,
+            position:[xPos,yPos,pixelSize,pixelSize],
+            visible: true,
+            components: [
+              { type:  "box",position:[0,0,100,100],fill:"rgba(255, 0, 0, 1)",stroke:"rgba(0, 255, 0, 1)",width:10},
+            ]
+          });
+          posCalc(i);
+        }
+      //}, 40);
+      break;
+    case "ui_component_clicked":
+      
+      break;
+  }
+};
+
+function posCalc(i){
+  if(i>=xNum){
+    yPos += pixelSize;
+    xPos = 0;
+    xNum += Math.round(100/pixelSize);
+  } else {
+    xPos += pixelSize;
+  }
+}
+
