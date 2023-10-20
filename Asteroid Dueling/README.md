@@ -1,4 +1,6 @@
 # Asteroid Dueling
+*I didn't make the code to shoot the asteroids, I took it from arena mod*
+
 This is just like a regular a dueling mod, but instead of fighting with lasers, you're fighting with asteroids!
 No button pushing required to fire, just click like you normally would. It is made possible by utilizing dash on the ships. 
 Unfortunately, this means that there is a bit of a jump when the ship fires if it is not already going full speed. The dash speed has been matched to the speed of the ships to help make this a bit less noticable, but it still takes some getting used to.
