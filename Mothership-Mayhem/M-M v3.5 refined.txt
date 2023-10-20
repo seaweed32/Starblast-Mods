@@ -40,34 +40,34 @@ var map =
 "999999999999999999999999999999999999999999999999999999999999\n"+
 "999999999999999999999999999999999999999999999999999999999999\n"+
 "999999999999999999999999999999999999999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
 "999999999999999999999999            999999999999999999999999\n"+
-"99999999999999999999999              99999999999999999999999\n"+
 "9999999999999999999999                9999999999999999999999\n"+
 "999999999999999999999                  999999999999999999999\n"+
 "99999999999999999999                    99999999999999999999\n"+
 "9999999999999999999                      9999999999999999999\n"+
+"9999999999999999999                      9999999999999999999\n"+
+"999999999999999999                        999999999999999999\n"+
 "999999999999999999                        999999999999999999\n"+
 "99999999999999999                          99999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
-"9999999999999999                            9999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
+"99999999999999999                          99999999999999999\n"+
 "99999999999999999                          99999999999999999\n"+
 "999999999999999999                        999999999999999999\n"+
+"999999999999999999                        999999999999999999\n"+
+"9999999999999999999                      9999999999999999999\n"+
 "9999999999999999999                      9999999999999999999\n"+
 "99999999999999999999                    99999999999999999999\n"+
 "999999999999999999999                  999999999999999999999\n"+
 "9999999999999999999999                9999999999999999999999\n"+
-"99999999999999999999999              99999999999999999999999\n"+
 "999999999999999999999999            999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"999999999999999999999999999999999999999999999999999999999999\n"+
+"999999999999999999999999999999999999999999999999999999999999\n"+
 "999999999999999999999999999999999999999999999999999999999999\n"+
 "999999999999999999999999999999999999999999999999999999999999\n"+
 "999999999999999999999999999999999999999999999999999999999999\n"+
@@ -88,36 +88,13 @@ var map =
 //var waiter = true;
 var spamStop = true;
 var swarmId = 0;
-var respawnList = [];
 var playersLeft = [];
-//cooldown lists
-var hyperReadyList = {
-};
-var swarmReadyList = {
-};
-var kunReadyList = {
-};
-var healReadyList = {
-};
-var overReadyList = {
-};
-var rayReadyList = {
-};
-var diarrheaReadyList = {
-};
-var waveReadyList = {
-};
-var miniReadyList = {
-};
-var megaReadyList = {
-};
 
-var readyLists = [hyperReadyList,swarmReadyList,kunReadyList,healReadyList,overReadyList,rayReadyList,diarrheaReadyList,waveReadyList,miniReadyList,megaReadyList];
 
 var ring = {
   id: "ring",
   obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
-  emissive:"https://raw.githubusercontent.com/OldGregg32/Starblast-3d-image-test/main/MM%20background.png",
+  emissive:"https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/MM%20background%20small.jpg",
   specularColor: 0x0000FF,
   transparent: true
 };
@@ -125,9 +102,9 @@ var ring = {
 game.setObject({
   id: "ring",
   type: ring,
-  position: {x:0,y:0,z:-5},
+  position: {x:0,y:11,z:-5},
   rotation: {x:-72.27,y:0,z:0},
-  scale: {x:410,y:400,z:0}
+  scale: {x:320,y:320,z:0}
 });
 
 function newUI(ship,id,xPos,yPos,value,shortcut){
@@ -227,132 +204,132 @@ function gameWon(name){
 
 //ability functions
 function hyperSpeed(ship){
-  if (hyperReadyList[ship.id] === true && ship.type != 101){
-    hyperReadyList[ship.id] = false;
+  if (ship.custom.hyper && ship.type != 101){
+    ship.custom.hyper = false;
     ship.set({type:702});
     setTimeout( () => {
     ship.set({type:701});
     }, 400);
             
     setTimeout( () => {
-      hyperReadyList[ship.id] = true;
+      ship.custom.hyper = true;
     }, 15000);
   }
 }
 
 function missileSwarm(ship){
-  if (swarmReadyList[ship.id] === true && ship.type != 101){
-    swarmReadyList[ship.id] = false;
+  if (ship.custom.swarm && ship.type != 101){
+    ship.custom.swarm = false;
     swarmId = ship.id;
     spamStop = false;
     setTimeout( () => {
       spamStop = true;
     }, 8000);
     setTimeout( () => {
-      swarmReadyList[ship.id] = true;
+      ship.custom.swarm = true;
     }, 15000);
   }
 }
 
 function absoluteKun(ship){
-  if (kunReadyList[ship.id] === true && ship.type != 101){
-    kunReadyList[ship.id] = false;
+  if (ship.custom.kun && ship.type != 101){
+    ship.custom.kun = false;
     ship.set({type:703});
     setTimeout( () => {
     ship.set({type:701});
     }, 4500);
             
     setTimeout( () => {
-      kunReadyList[ship.id] = true;
+      ship.custom.kun = true;
     }, 15000);
   }
 }
 
 function burstHeal(ship){
-  if (healReadyList[ship.id] === true && ship.type != 101){
-    healReadyList[ship.id] = false;
+  if (ship.custom.heal && ship.type != 101){
+    ship.custom.heal = false;
     ship.set({shield:ship.shield+14000});
     setTimeout( () => {
-      healReadyList[ship.id] = true;
+      ship.custom.heal = true;
     }, 15000);
   }
 }
 
 function overdrive(ship){
-  if (overReadyList[ship.id] === true && ship.type != 101){
-    overReadyList[ship.id] = false;
+  if (ship.custom.over && ship.type != 101){
+    ship.custom.over = false;
     ship.set({type:704});
     setTimeout( () => {
     ship.set({type:701});
     }, 6000);
             
     setTimeout( () => {
-      overReadyList[ship.id] = true;
+      ship.custom.over = true;
     }, 15000);
   }
 }
 
 function Deathray(ship){
-  if (rayReadyList[ship.id] === true && ship.type != 101){
-    rayReadyList[ship.id] = false;
+  if (ship.custom.ray && ship.type != 101){
+    ship.custom.ray = false;
     ship.set({type:705,generator:10000});
     setTimeout( () => {
       ship.set({type:701});
     }, 5000);
             
     setTimeout( () => {
-      rayReadyList[ship.id] = true;
+      ship.custom.ray = true;
     }, 15000);
   }
 }
 
 function Diarrhea(ship){
-  if (diarrheaReadyList[ship.id] === true && ship.type != 101){
-    diarrheaReadyList[ship.id] = false;
+  if (ship.custom.diarrhea && ship.type != 101){
+    ship.custom.diarrhea = false;
     ship.set({type:706,generator:10000});
     setTimeout( () => {
       ship.set({type:701});
     }, 5000);
             
     setTimeout( () => {
-      diarrheaReadyList[ship.id] = true;
+      ship.custom.diarrhea = true;
     }, 15000);
   }
 }
 function laserWave(ship){
-  if(waveReadyList[ship.id] === true && ship.type != 101){
-    waveReadyList[ship.id] = false;
+  if(ship.custom.wave && ship.type != 101){
+    ship.custom.wave = false;
     ship.set({type:707,generator:30000});
     setTimeout( () => {
       ship.set({type:701});
     }, 3500);
     setTimeout( () => {
-      waveReadyList[ship.id] = true;
+      ship.custom.wave = true;
     }, 15000);
   }
 }
 function miniShip(ship){
-  if(miniReadyList[ship.id] === true && ship.type != 101){
-    miniReadyList[ship.id] = false;
+  if (ship.custom.mini && ship.type != 101){
+    ship.custom.mini = false;
     ship.set({type:708,generator:10000});
     setTimeout( () => {
       ship.set({type:701});
     }, 5000);
     setTimeout( () => {
-      miniReadyList[ship.id] = true;
+      ship.custom.mini = true;
     }, 15000);
   }
 }
 
 function megaPulse(ship){
-  if(megaReadyList[ship.id] === true && ship.type != 101){
-    megaReadyList[ship.id] = false;
+  if(ship.custom.mega && ship.type != 101){
+    ship.custom.mega = false;
     ship.set({type:709,generator:10000});
     setTimeout( () => {
       ship.set({type:701});
     }, 2000);
     setTimeout( () => {
-      megaReadyList[ship.id] = true;
+      ship.custom.mega = true;
     }, 15000);
   }
 }
@@ -393,23 +370,11 @@ this.tick = function(game,ship) {
     }
     }
   }
-  //walls
-  for(ship=0;ship<game.ships.length;ship++){
-    //top
-    if (game.ships[ship].y > 140){
-      game.ships[ship].set({y:game.ships[ship].y - (game.ships[ship].y-140),vy:game.ships[ship].vy-(game.ships[ship].vy * 2)});
-    }
-    //bottom
-    if (game.ships[ship].y < -140){
-      game.ships[ship].set({y:game.ships[ship].y + Math.abs((game.ships[ship].y+140)),vy:game.ships[ship].vy-(game.ships[ship].vy * 2)});
-    }
-    //right
-    if (game.ships[ship].x > 140){
-      game.ships[ship].set({x:game.ships[ship].x - (game.ships[ship].x-140),vx:game.ships[ship].vx-(game.ships[ship].vx * 2)});
-    }
-    //left
-    if (game.ships[ship].x < -140){
-      game.ships[ship].set({x:game.ships[ship].x + Math.abs((game.ships[ship].x+140)),vx:game.ships[ship].vx-(game.ships[ship].vx * 2)});
+  //teleporters
+  for(let ship of game.ships){
+    if(Math.sqrt(Math.pow(ship.x, 2) + Math.pow(ship.y, 2) >= 17000)){
+      ship.set({vx:0,vy:0});
+      ship.set({vx:ship.vx*-1,vy:ship.vy*-1,x:ship.x*0.99,y:ship.y*0.99});
     }
   }
 };
@@ -418,13 +383,13 @@ this.tick = function(game,ship) {
 this.event = function(event, game) {
   switch (event.name) {
     case "ship_spawned":
-      if(respawnList.includes(event.ship.id) != true){
+      if(!event.ship.custom.respawn){
         playersLeft.push(event.ship.id);
       }
       echo(playersLeft);
       //UI components
       newUI(event.ship,"hyper_speed",1,30,"Hyperspeed","1");
-      newUI(event.ship,"missile_swarm",1,35,"Missile-Swarm","2");
+      newUI(event.ship,"missile_swarm",1,35,"Missile-Spam","2");
       newUI(event.ship,"absolute_kun",1,40,"Absolute-Kun","3");
       newUI(event.ship,"burst_heal",1,45,"Burst-Heal","4");
       newUI(event.ship,"over_drive",1,50,"Overdrive","5");
@@ -434,19 +399,19 @@ this.event = function(event, game) {
       newUI(event.ship,"mini_ship",1,70,"Mini-Ship","9");
       newUI(event.ship,"mega_pulse",1,75,"Mega-Pulse","0");
       //setting new player's ablility ready true
-      hyperReadyList[event.ship.id] = true;
-      swarmReadyList[event.ship.id] = true;
-      kunReadyList[event.ship.id] = true;
-      healReadyList[event.ship.id] = true;
-      overReadyList[event.ship.id] = true;
-      rayReadyList[event.ship.id] = true;
-      diarrheaReadyList[event.ship.id] = true;
-      waveReadyList[event.ship.id] = true;
-      miniReadyList[event.ship.id] = true;
-      megaReadyList[event.ship.id] = true;
+      event.ship.custom.hyper = true;
+      event.ship.custom.swarm = true;
+      event.ship.custom.kun = true;
+      event.ship.custom.heal = true;
+      event.ship.custom.over = true;
+      event.ship.custom.ray = true;
+      event.ship.custom.diarrhea = true;
+      event.ship.custom.wave = true;
+      event.ship.custom.mini = true;
+      event.ship.custom.mega = true;
       //welcome message and instructions
       event.ship.set({crystals:980, shield:50000});
-      if(respawnList.includes(event.ship.id) != true){
+      if(!event.ship.custom.respawn){
         event.ship.instructorSays("Welcome, commander, to Mothership Mayhem!","Kan");
       setTimeout( () => {
         event.ship.instructorSays("Your mothership has been equiped with 10 ability modules, each of which can be used once every 15 seconds.","Kan");
@@ -455,7 +420,7 @@ this.event = function(event, game) {
         event.ship.instructorSays("1 - Hyperspeed","Kan");
       }, 5750);
       setTimeout( () => {
-        event.ship.instructorSays("2 - Missile-Swarm","Kan");
+        event.ship.instructorSays("2 - Missile-Spam","Kan");
       }, 8250);
       setTimeout( () => {
         event.ship.instructorSays("3 - Absolute-Kuntrol","Kan");
@@ -503,7 +468,7 @@ this.event = function(event, game) {
           
         case "missile_swarm":
           missileSwarm(event.ship);
-          cooldownUI(event.ship,"missile_swarm",1,35,"2","Missile-Swarm");
+          cooldownUI(event.ship,"missile_swarm",1,35,"2","Missile-Spam");
           break;
           
         case "absolute_kun":
@@ -550,7 +515,7 @@ this.event = function(event, game) {
       }
       break;
     case "ship_destroyed":
-      respawnList.push(event.ship.id);
+      event.ship.custom.respawn = true;
       //set killed ship to spectator and remove it's id from playersLeft
       event.ship.intermission({"Rank":game.ships.length});
       event.ship.set({type:101,collider:false});
