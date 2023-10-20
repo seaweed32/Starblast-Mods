@@ -6,7 +6,8 @@ The code could definitely be improved, but this is the best version I've made so
 
 
 
-![MM GH image](https://github.com/seaweed32/Starblast-Mods/assets/132213277/4bf25df4-ab06-4996-8a42-bfafc0cf809d)
+
+![MM GH image new version](https://github.com/seaweed32/Starblast-Mods/assets/132213277/ecc96326-bcf1-4c7a-8ac9-2bb4e70b7c9a)
 
 
 
