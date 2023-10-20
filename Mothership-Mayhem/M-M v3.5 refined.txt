@@ -373,7 +373,6 @@ this.tick = function(game,ship) {
   //teleporters
   for(let ship of game.ships){
     if(Math.sqrt(Math.pow(ship.x, 2) + Math.pow(ship.y, 2) >= 17000)){
-      ship.set({vx:0,vy:0});
       ship.set({vx:ship.vx*-1,vy:ship.vy*-1,x:ship.x*0.99,y:ship.y*0.99});
     }
   }
