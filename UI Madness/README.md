@@ -1,5 +1,5 @@
 # UI Madness 
-It has a tendency to not work for the people who join after the first person. I'm not totally sure why it does this, but it should be kept in mind if you're trying to show it to someone.
+*It has a tendency to not work for the people who join after the first person. I'm not totally sure why it does this, but it should be kept in mind if you're trying to show it to someone.*
 
 You can adjust the size of the flashing pixels by changing ***pixelSize*** and you can adjust how quickly they flash by changing ***loopNum***.
 The value of ***loopNum*** is how many times a pixel change will happen per tick (roughly, I'm sure that lag plays a large part in how many actually happen).
