@@ -6,7 +6,7 @@ At some point I'd like to find a better way of doing this other than using dash,
 The current version only has the A-Fighter, Scorpion, Condor, A-Speed, Barracuda, and O-Defender.
 
 
-*I didn't make the code to shoot the asteroids, I took it from arena mod*
+*I didn't make the code that gets the direction the ship is facing to launch the asteroids, I took it from arena mod*
 
 https://github.com/seaweed32/Starblast-Mods/assets/132213277/a158802b-6618-4228-a655-d3806bb110fb
 
