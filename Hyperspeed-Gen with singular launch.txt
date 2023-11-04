@@ -1,0 +1,147 @@
+var ships = [];
+
+var Zing_753 = '{"name":"Zing","level":7.5,"model":3,"size":4,"specs":{"shield":{"capacity":[99999999999,99999999999],"reload":[99999999999,99999999999]},"generator":{"capacity":[99999999999,99999999999],"reload":[99999999999,99999999999]},"ship":{"mass":-1250,"speed":[180,180],"rotation":[100,100],"acceleration":[150,150]}},"bodies":{"main":{"section_segments":20,"offset":{"x":0,"y":-60,"z":0},"position":{"x":[0,0,0,0,0],"y":[-10,10,13,120,110],"z":[0,0,0,0,0]},"width":[0,10,13,13,0],"height":[0,10,13,13,0],"texture":[4,63,3,17],"propeller":true,"laser":{"damage":[270,270],"rate":-1,"type":1,"speed":[200,200],"number":1,"error":0}}},"wings":{"mainWings":{"offset":{"x":0,"y":-30,"z":0},"doubleside":true,"length":[30,15],"width":[30,75,40],"angle":[0,0,0],"position":[0,40,0],"texture":[1],"bump":{"position":-10,"size":10}},"backClaw":{"offset":{"x":0,"y":18,"z":0},"doubleside":true,"length":[30,15,15,4.5],"width":[30,75,75,45,30],"angle":[0,0,0,0,0],"position":[0,40,0,0,0],"texture":[2],"bump":{"position":-10,"size":5}}},"typespec":{"name":"Zing","level":7.5,"model":3,"code":753,"specs":{"shield":{"capacity":[99999999999,99999999999],"reload":[99999999999,99999999999]},"generator":{"capacity":[99999999999,99999999999],"reload":[99999999999,99999999999]},"ship":{"mass":-1250,"speed":[180,180],"rotation":[100,100],"acceleration":[150,150]}},"shape":[5.6,4.97,4.122,3.328,3.12,3.148,5.381,4.924,4.436,4.095,4.238,4.61,5.012,5.201,5.326,5.549,5.796,5.791,5.756,5.709,6.172,6.862,7.901,8.008,4.886,4.809,4.886,8.008,7.901,6.862,6.172,5.709,5.756,5.791,5.796,5.549,5.326,5.201,5.016,4.61,4.238,4.095,4.436,4.924,5.381,3.148,3.12,3.328,4.122,4.97],"lasers":[{"x":0,"y":-5.6,"z":0,"angle":0,"damage":[270,270],"rate":-1,"type":1,"speed":[200,200],"number":1,"spread":0,"error":0,"recoil":0}],"radius":8.008}}';
+
+ships.push(Zing_753);
+
+this.options = {
+  root_mode: "",
+  map_name: "Hyperspeed",
+  map_size: 80,
+  ships: ships,
+  starting_ship: 753,
+  reset_tree: false,
+  bouncing_lasers: true,
+  custom_map: [],
+  weapons_store: false,
+};
+
+this.tick = function(game) {
+};
+
+this.event = function(event, game) {
+  switch (event.name) {
+    case "ship_spawned":
+    event.ship.set({x:0,y:0});
+    event.ship.setUIComponent({
+      id:"go_button",
+      position:[1,30,13,3],
+      clickable: true,
+      shortcut: "H",
+      visible: true,
+      components: [
+        { type:  "box",position:[0,0,100,100],fill:"rgba(68, 85, 102, 0)",stroke:"rgba(112,128,144)",width:3},
+        { type: "text",position:[0,0,100,100],value:"[H] Hyperspeed!",color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+      break;
+    case "ui_component_clicked":
+      switch (event.id){
+        case "go_button":
+          go(event.ship);
+          break;
+      }
+      break;
+  }
+};
+
+
+go = function(ship){
+  for (let alien of game.aliens) {
+    alien.set({kill: true});
+  }
+  ship.set({type:753,x:0,y:0,vx:0,vy:0,idle:true});
+    ship.setUIComponent({
+      id:"speed",
+      visible: false,
+    });
+  setTimeout(function() {
+    for(let i=0;i<300;i++){
+      game.addAlien({code:19,level:3});
+    }
+    ship.set({idle:false});
+  }, 1500);
+  setTimeout(function() {
+    speed();
+    speedUI(ship);
+    killA();
+  }, 3000);
+};
+
+goAll = function(){
+  for (let alien of game.aliens) {
+    alien.set({kill: true});
+  }
+  for(let ship of game.ships){
+    ship.set({type:753,x:0,y:0,vx:0,vy:0,idle:true});
+    ship.setUIComponent({
+      id:"speed",
+      visible: false,
+    });
+  }
+  setTimeout(function() {
+    for(let i=0;i<300;i++){
+      game.addAlien({code:19,level:3});
+    }
+    for(let ship of game.ships){
+      ship.set({idle:false});
+    }
+  }, 1500);
+  setTimeout(function() {
+    speed();
+    for(let ship of game.ships){
+      speedUI(ship);
+    }
+    killA();
+  }, 3000);
+};
+
+speed = function(){
+  for(let ship of game.ships){
+    echo(`Name: ${ship.name}, vx: ${ship.vx}, vy: ${ship.vy}`);
+  }
+};
+
+speedUI = function(ship){
+  let vx = ship.vx;
+  let vy = ship.vy;
+  ship.vx===0?vx='No speed available':vx=vx;
+  ship.vy===0?vy='No speed available':vy=vy;
+  ship.setUIComponent({
+    id:"speed",
+    position:[25,10,50,50],
+    clickable: false,
+    shortcut: "",
+    visible: true,
+    components: [
+      { type: "text",position:[0,0,100,100],value:`Your speed:`,color:"rgba(255, 255, 255, 1)"},
+      { type: "text",position:[0,25,100,100],value:`vx: ${vx}`,color:"rgba(255, 255, 255, 1)"},
+      { type: "text",position:[0,35,100,100],value:`vy: ${vy}`,color:"rgba(255, 255, 255, 1)"},
+    ]
+  });
+};
+
+info = function(){
+  for (let i=0;i<game.ships.length;i++){
+    const ship = game.ships[i];
+    game.modding.terminal.echo(`Index: ${i}, Name: ${ship.name}, type: ${ship.type}\nX: ${Math.round(ship.x)}, Y: ${Math.round(ship.y)}`);
+  }
+};
+
+killA = function(){
+  for (let alien of game.aliens) {
+    alien.set({kill: true});
+  }
+};
+
+addA = function(){
+  for(let i=0;i<300;i++){
+    game.addAlien({code:19,level:3});
+  }
+};
+
+setAll = function(){
+  for(let ship of game.ships){
+    ship.set({type:753});
+  }
+};
