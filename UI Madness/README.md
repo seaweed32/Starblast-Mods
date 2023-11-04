@@ -11,7 +11,7 @@ https://github.com/seaweed32/Starblast-Mods/assets/132213277/70c3816b-5fb9-45a6-
 
 
 ## 1% pixel size
-
+This one is rather laggy as you can see
 
 https://github.com/seaweed32/Starblast-Mods/assets/132213277/f48b42ab-cf97-4997-abdb-c0b165046f5a
 
