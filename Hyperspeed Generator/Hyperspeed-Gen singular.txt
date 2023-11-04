@@ -45,30 +45,7 @@ this.event = function(event, game) {
   }
 };
 
-
-go = function(ship){
-  for (let alien of game.aliens) {
-    alien.set({kill: true});
-  }
-  ship.set({type:753,x:0,y:0,vx:0,vy:0,idle:true});
-    ship.setUIComponent({
-      id:"speed",
-      visible: false,
-    });
-  setTimeout(function() {
-    for(let i=0;i<300;i++){
-      game.addAlien({code:19,level:3});
-    }
-    ship.set({idle:false});
-  }, 1500);
-  setTimeout(function() {
-    speed();
-    speedUI(ship);
-    killA();
-  }, 3000);
-};
-
-goAll = function(){
+goAll = function(){ //hyperspeed everyone in the game at once
   for (let alien of game.aliens) {
     alien.set({kill: true});
   }
@@ -92,6 +69,35 @@ goAll = function(){
     for(let ship of game.ships){
       speedUI(ship);
     }
+    killA();
+  }, 3000);
+};
+
+info = function(){ //get a list of players, their indexes, and their ship types
+  for (let i=0;i<game.ships.length;i++){
+    const ship = game.ships[i];
+    game.modding.terminal.echo(`Index: ${i}, Name: ${ship.name}, type: ${ship.type}\nX: ${Math.round(ship.x)}, Y: ${Math.round(ship.y)}`);
+  }
+};
+
+go = function(ship){
+  for (let alien of game.aliens) {
+    alien.set({kill: true});
+  }
+  ship.set({type:753,x:0,y:0,vx:0,vy:0,idle:true});
+    ship.setUIComponent({
+      id:"speed",
+      visible: false,
+    });
+  setTimeout(function() {
+    for(let i=0;i<300;i++){
+      game.addAlien({code:19,level:3});
+    }
+    ship.set({idle:false});
+  }, 1500);
+  setTimeout(function() {
+    speed();
+    speedUI(ship);
     killA();
   }, 3000);
 };
@@ -121,27 +127,14 @@ speedUI = function(ship){
   });
 };
 
-info = function(){
-  for (let i=0;i<game.ships.length;i++){
-    const ship = game.ships[i];
-    game.modding.terminal.echo(`Index: ${i}, Name: ${ship.name}, type: ${ship.type}\nX: ${Math.round(ship.x)}, Y: ${Math.round(ship.y)}`);
-  }
-};
-
-killA = function(){
+killA = function(){ //kill all aliens in the game
   for (let alien of game.aliens) {
     alien.set({kill: true});
   }
 };
 
-addA = function(){
+addA = function(){ //add the 300 level 3 sausers
   for(let i=0;i<300;i++){
     game.addAlien({code:19,level:3});
-  }
-};
-
-setAll = function(){
-  for(let ship of game.ships){
-    ship.set({type:753});
   }
 };
