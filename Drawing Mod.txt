@@ -1,0 +1,227 @@
+var ships = [];
+
+var The_Pencil_402 = '{"name":"The-Pencil","level":4,"model":2,"size":6,"specs":{"shield":{"capacity":[1000,1000],"reload":[100,100]},"generator":{"capacity":[1,1],"reload":[1,1]},"ship":{"mass":1,"speed":[90,90],"rotation":[130,130],"acceleration":[120,120]}},"bodies":{"pencil":{"section_segments":8,"offset":{"x":0,"y":50,"z":0},"position":{"x":[0,0,0,0,0,0,0],"y":[-50,-40,-30,35,45,50,40],"z":[0,0,0,0,0,0,0]},"height":[0,3,6,6,6,6,1],"width":[0,3,6,6,6,6,1],"texture":[4,6,63,2,17],"propeller":true}},"typespec":{"name":"The-Pencil","level":4,"model":2,"code":402,"specs":{"shield":{"capacity":[1000,1000],"reload":[100,100]},"generator":{"capacity":[1,1],"reload":[1,1]},"ship":{"mass":1,"speed":[90,90],"rotation":[130,130],"acceleration":[120,120]}},"shape":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.795,11.465,12.022,11.465,3.795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"lasers":[],"radius":12.022}}';
+
+ships.push(The_Pencil_402);
+
+var vocabulary = [
+  { text: "You", icon:"\u004e", key:"O" },
+  { text: "GG", icon:"\u00a3", key:"G" },
+  { text: "Sorry", icon:"\u00a1", key:"S" },
+  { text: "No Problem", icon:"\u0047", key:"P" },
+  { text: "hmm?", icon:"\u004b", key:"Q" },
+  { text: "Wait", icon:"\u0048", key:"T" },
+  { text: "Yes", icon:"\u004c", key:"Y" },
+  { text: "No", icon:"\u004d", key:"N" },
+  { text: "Thanks", icon:"\u0041", key:"X" },
+  { text: "Follow", icon:"\u0050", key:"F" },
+  { text: "Me", icon:"\u004f", key:"E" },
+  { text: "Bruh", icon:"💀", key: "I" },
+];
+
+const drawButton = {
+  id: "draw_button",
+  position: [5,30,10,5],
+  clickable: true,
+  shortcut: "D",
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,95],value:"[D] Draw",color:"rgba(255, 255, 255, 1)"},
+    { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+  ]
+};
+
+const clearButton = {
+  id: "clear_button",
+  position: [5,37,10,5],
+  clickable: true,
+  shortcut: "W",
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,95],value:"[W] Clear",color:"rgba(255, 255, 255, 1)"},
+    { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+  ]
+};
+
+const undoButton = {
+  id: "undo_button",
+  position: [5,44,10,5],
+  clickable: true,
+  shortcut: "V",
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,95],value:"[V] Undo",color:"rgba(255, 255, 255, 1)"},
+    { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+  ]
+};
+
+const sizeButton = {
+  id: "size_button",
+  position: [5,51,10,5],
+  clickable: true,
+  shortcut: "B",
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,90],value:"[B] Size - 2",color:"rgba(255, 255, 255, 1)"},
+    { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+  ]
+};
+
+const colorButton = {
+  id: "color_button",
+  position: [5,58,10,5],
+  clickable: true,
+  shortcut: "L",
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,90],value:"[L] white",color:"rgba(255, 255, 255, 1)"},
+    { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+  ]
+};
+
+this.options = {
+  root_mode: "",
+  map_name: "Drawing Mod",
+  map_size: 80,
+  ships: ships,
+  starting_ship: 402,
+  starting_ship_maxed: true,
+  reset_tree: false,
+  custom_map: [],
+  max_level: 4,
+  vocabulary: vocabulary,
+  weapons_store: false,
+};
+
+this.tick = function(game) {
+};
+
+this.event = function(event, game) {
+  switch (event.name) {
+    case "ship_spawned":
+    event.ship.custom.drawNum = 0;
+    event.ship.custom.canDraw = true;
+    event.ship.custom.size = 2;
+    event.ship.custom.color = "white";
+    event.ship.setUIComponent(drawButton);
+    event.ship.setUIComponent(clearButton);
+    event.ship.setUIComponent(undoButton);
+    event.ship.setUIComponent(sizeButton);
+    event.ship.setUIComponent(colorButton);
+    event.ship.set({x:0,y:0,crystals:320});
+      break;
+    case "ui_component_clicked":
+      switch (event.id) {
+        
+        case "draw_button":
+          draw(event.ship);
+          break;
+          
+        case "clear_button":
+          clear(event.ship);
+          break;
+        
+        case "undo_button":
+          undo(event.ship);
+          break;
+          
+        case "size_button":
+          size(event.ship);
+          break;
+        
+        case "color_button":
+          color(event.ship);
+          break;
+      }
+      break;
+    case "ship_destroyed":
+      clear(event.ship);
+      break;
+  }
+};
+
+function draw(ship){
+  game.setObject({
+    id: `${ship.id}_${ship.custom.drawNum}`,
+    type:{
+      id: ship.custom.color,
+      obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
+      emissive: `https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/white-draw.png`,
+      emissiveColor: hexColors[ship.custom.color],
+      transparent:true,
+    },
+    position: {x:ship.x,y:ship.y,z:-5},
+    rotation: {x:0,y:0,z:0},
+    scale: {x:ship.custom.size,y:ship.custom.size,z:1}
+  });
+  ship.custom.drawNum++;
+}
+
+function clear(ship){
+  ship.custom.canDraw = false;
+  for(let i=0;i<ship.custom.drawNum;i++){
+    game.removeObject(`${ship.id}_${i}`);
+  }
+  ship.custom.drawNum = 0;
+  ship.custom.canDraw = true;
+}
+
+function undo(ship){
+  ship.custom.canDraw = false;
+  game.removeObject(`${ship.id}_${ship.custom.drawNum}`);
+  ship.custom.drawNum--;
+  ship.custom.canDraw = true;
+}
+
+function size(ship){
+  if(ship.custom.size == 7){
+    ship.custom.size = 0.5;
+  } else {
+    ship.custom.size += 0.5;
+  }
+  ship.setUIComponent({
+    id: "size_button",
+    position: [5,51,10,5],
+    clickable: true,
+    shortcut: "B",
+    visible: true,
+    components: [
+      { type: "text",position:[0,0,100,90],value:`[B] Size - ${ship.custom.size}`,color:"rgba(255, 255, 255, 1)"},
+      { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+    ]
+  });
+}
+
+const colors = ["white","black","red","orange","yellow","green","cyan","blue","purple","pink","white"];
+const hexColors = {
+  "white":0xFFFFFF,
+  "black":0x000000,
+  "red":0xFF0000,
+  "orange":0xFF8800,
+  "yellow":0xFFFF00,
+  "green":0x00FF00,
+  "cyan":0x00FFFF,
+  "blue":0x0000FF,
+  "purple":0xBB00FF,
+  "pink":0xFF00FF
+};
+
+function color(ship){
+  ship.custom.color = colors[colors.indexOf(ship.custom.color)+1];
+  ship.setUIComponent({
+    id: "color_button",
+    position: [5,58,10,5],
+    clickable: true,
+    shortcut: "L",
+    visible: true,
+    components: [
+      { type: "text",position:[0,0,100,90],value:`[L] ${ship.custom.color}`,color:"rgba(255, 255, 255, 1)"},
+      { type:  "box",position:[0,0,100,100],fill:"rgba(0, 0, 0, 0)",stroke:"rgba(255, 255, 255, 1)",width:3},
+    ]
+  });
+}
+
+clearAll = function(){
+  game.removeObject();
+};
+
