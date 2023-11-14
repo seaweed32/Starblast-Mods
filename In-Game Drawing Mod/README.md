@@ -6,7 +6,7 @@ You draw by holding down the **draw button** and flying around, or placing singl
 The **clear button** clears everything you have drawn, but leaves everyone elses. If you are hosting and want to clear everyones drawings, there's a clear-all function you can run.
 The **undo button** removes the last dot placed by the user. You can hold it down to quickly remove larger portions.
 The **size button** flips between sizes, the **color button** flips between white, black, red, orange, yellow, green, cyan, blue, purple, and pink, and the shape button flips between circle, square, star, and triangle.
-There does get to be a lot of lag as the drawing amount expands, but you can get a lot out of it before having to clear everything if you spread out across the map instead of drawing everything in one place. Sometimes when you clear you art, a bit will be left behind and you won't be able to get rid of it. I usually just move to a new spot, or cover it up with a new drawing, but if it happens too much run clearAll().
+There does get to be a lot of lag as the drawing amount expands, but you can get a lot out of it before having to clear everything if you spread out across the map instead of drawing everything in one place. Sometimes when you clear your art, a bit will be left behind and you won't be able to get rid of it. I usually just move to a new spot, or cover it up with a new drawing, but if it happens too much run clearAll().
 ### Here's a few examples of art me and Emitytrap/partytime0181 made
 
 ![Apple-Orange](https://github.com/seaweed32/Starblast-Mods/assets/132213277/3e6037a8-1c5a-4f15-8479-c6d7229aae62)
