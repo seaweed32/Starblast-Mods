@@ -1,6 +1,6 @@
 # In-Game Drawing Mod
 In this mod, you are a pencil drawing in space!
-There is a draw button, a clear button, an undo button, a size button, and a color button.
+There is a draw button, a clear button, an undo button, a size button a color button, and a shape button.
 Currently there are 10 colors to choose from, 14 sizes, and 4 shapes.
 You draw by holding down the **draw button** and flying around, or placing single dots by just pressing it once.
 The **clear button** clears everything you have drawn, but leaves everyone elses. If you are hosting and want to clear everyones drawings, there's a clear-all function you can run.
