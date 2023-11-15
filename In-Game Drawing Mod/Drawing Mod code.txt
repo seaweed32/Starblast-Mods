@@ -186,11 +186,13 @@ this.event = function(event, game) {
       break;
     case "ship_destroyed":
       clear(event.ship);
+      event.ship.custom.canDraw = false;
       break;
   }
 };
 
 function draw(ship){
+  if(!banList.includes(ship.name)){
   game.setObject({
     id: `${ship.id}_${ship.custom.drawNum}`,
     type:{
@@ -205,6 +207,7 @@ function draw(ship){
     scale: {x:ship.custom.size,y:ship.custom.size,z:1}
   });
   ship.custom.drawNum++;
+  }
 }
 
 clear = function(ship){
@@ -275,5 +278,21 @@ function shape(ship){
 
 clearAll = function(){
   game.removeObject();
+};
+
+info = function(){
+  for (let ship of game.ships){
+    echo(`Index: ${game.ships.indexOf(ship)}, Name: ${ship.name}, Id: ${ship.id}\n`);
+  }
+};
+
+let banList = [];
+ban = function(id){
+  banList.push(game.findShip(id).name);
+  clear(game.findShip(id));
+};
+
+unban = function(id){
+  banList.splice(game.findShip(id).name,1);
 };
 
