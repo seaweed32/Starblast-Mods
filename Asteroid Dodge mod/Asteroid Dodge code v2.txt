@@ -7,6 +7,20 @@ var Shadow_X_2_505 = '{"name":"Shadow X-2","level":5,"model":5,"size":1.1,"specs
 
 ships.push(Shadow_X_2_505);
 
+var vocabulary = [
+  { text: "You", icon:"\u004e", key:"O" },
+  { text: "GG", icon:"\u00a3", key:"G" },
+  { text: "Sorry", icon:"\u00a1", key:"S" },
+  { text: "No Problem", icon:"\u0047", key:"P" },
+  { text: "hmm?", icon:"\u004b", key:"Q" },
+  { text: "Wait", icon:"\u0048", key:"T" },
+  { text: "Yes", icon:"\u004c", key:"Y" },
+  { text: "No", icon:"\u004d", key:"N" },
+  { text: "Thanks", icon:"\u0041", key:"X" },
+  { text: "Follow", icon:"\u0050", key:"F" },
+  { text: "Me", icon:"\u004f", key:"E" },
+  { text: "Bruh", icon:"💀", key: "I" },
+];
 
 var map = 
 "99999999999999999999999999        99999999999999999999999999\n"+
@@ -111,8 +125,8 @@ this.options = {
   asteroids_strength: 1000000,
   starting_ship_maxed: true,
   custom_map: map,
+  vocabulary: vocabulary,
   map_name: "Asteroid Dodge"
-  
 };
 
 let warning = {
