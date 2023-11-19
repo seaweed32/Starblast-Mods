@@ -1,0 +1,449 @@
+//in minutes
+let gameLength = 3;
+
+var ships = [];
+
+var Shadow_X_2_505 = '{"name":"Shadow X-2","level":5,"model":5,"size":1.1,"specs":{"shield":{"capacity":[999999,999999],"reload":[999999,999999]},"generator":{"capacity":[1,1],"reload":[1,1]},"ship":{"mass":1,"speed":[140,140],"rotation":[75,75],"acceleration":[140,160]}},"bodies":{"main":{"section_segments":10,"offset":{"x":0,"y":0,"z":0},"position":{"x":[0,0,0,0,0,0,0,0,0,0,0,0],"y":[-100,-98,-95,-70,-40,0,40,70,80,90,100],"z":[0,0,0,0,0,0,0,0,0,0,0]},"width":[0,5,10,20,30,20,20,30,30,30,20,0],"height":[0,4,4,20,20,10,10,15,15,15,10,10],"texture":[12,5,63,4,4,3,4,4,5]},"back":{"section_segments":10,"offset":{"x":0,"y":0,"z":0},"position":{"x":[0,0,0,0,0],"y":[90,95,100,105,90],"z":[0,0,0,0,0]},"width":[10,15,18,19,2],"height":[3,5,7,8,2],"texture":[63],"propeller":true},"cockpit":{"section_segments":8,"offset":{"x":0,"y":-25,"z":12},"position":{"x":[0,0,0,0,0,0],"y":[-45,-40,-25,0,5],"z":[0,0,0,0,0,0]},"width":[0,10,15,5,0],"height":[0,10,15,5,0],"texture":[9]},"laser":{"section_segments":10,"offset":{"x":50,"y":10,"z":-13},"position":{"x":[0,0,0,0,0,0,0,0,0,0],"y":[-30,-25,0,10,20,25,30,40,70,60],"z":[0,0,0,0,0,0,0,0,0,0]},"width":[0,10,15,15,15,10,10,15,10,0],"height":[0,10,15,15,15,10,10,15,5,0],"texture":[6,4,10,3,4,3,2],"propeller":true,"laser":{"damage":[5,7],"rate":5,"type":1,"speed":[160,190],"number":1}}},"wings":{"top":{"doubleside":true,"offset":{"x":10,"y":60,"z":5},"length":[30],"width":[50,30],"angle":[60],"position":[0,50],"texture":[3],"bump":{"position":10,"size":10}},"side":{"doubleside":true,"offset":{"x":10,"y":70,"z":5},"length":[30],"width":[40,20],"angle":[-13],"position":[0,60],"texture":[63],"bump":{"position":10,"size":10}},"wings":{"offset":{"x":0,"y":35,"z":0},"length":[80],"width":[100,70],"angle":[0],"position":[-80,50],"texture":[4],"bump":{"position":10,"size":15}}},"typespec":{"name":"Shadow X-2","level":5,"model":5,"code":505,"specs":{"shield":{"capacity":[999999,999999],"reload":[999999,999999]},"generator":{"capacity":[1,1],"reload":[1,1]},"ship":{"mass":1,"speed":[140,140],"rotation":[75,75],"acceleration":[140,160]}},"shape":[2.2,2.141,1.787,1.481,1.272,1.135,1.076,1.035,1.016,1.188,1.343,1.35,1.371,1.416,1.46,1.564,1.887,2.17,2.405,2.753,3.16,2.084,2.79,3.199,2.656,2.315,2.656,3.199,2.79,2.084,3.16,2.753,2.405,2.17,1.887,1.564,1.46,1.416,1.372,1.35,1.343,1.188,1.016,1.035,1.076,1.135,1.272,1.481,1.787,2.141],"lasers":[{"x":1.1,"y":-0.44,"z":-0.286,"angle":0,"damage":[5,7],"rate":5,"type":1,"speed":[160,190],"number":1,"spread":0,"error":0,"recoil":0},{"x":-1.1,"y":-0.44,"z":-0.286,"angle":0,"damage":[5,7],"rate":5,"type":1,"speed":[160,190],"number":1,"spread":0,"error":0,"recoil":0}],"radius":3.199}}';
+
+ships.push(Shadow_X_2_505);
+
+
+var map = 
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999\n"+
+"99999999999999999999999999        99999999999999999999999999";
+
+let gameOn = false;
+
+var stop = {
+  id: "stop",
+  obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
+  emissive: "https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/stop-line.png",
+  emissiveColor: 0xFFFFFF,
+  transparent:true,
+};
+var arrow = {
+  id: "arrow",
+  obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
+  emissive: "https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/arrow.png",
+  emissiveColor: 0xFFFFFF,
+  transparent:true,
+};
+game.setObject({
+  id: "stop_top",
+  type: stop,
+  position: {x:0,y:14,z:-5},
+  rotation: {x:135,y:0,z:0},
+  scale: {x:444,y:50,z:1}
+});
+game.setObject({
+  id: "stop_bottom",
+  type: stop,
+  position: {x:0,y:-27,z:-5},
+  rotation: {x:135,y:0,z:0},
+  scale: {x:444,y:50,z:1}
+});
+
+
+this.options = {
+  root_mode: "",
+  map_size: 60,
+  starting_ship:505,
+  ships:ships,
+  reset_tree: false,
+  asteroids_strength: 1000000,
+  starting_ship_maxed: true,
+  custom_map: map,
+  map_name: "Asteroid Dodge"
+  
+};
+
+let warning = {
+  id:"warning",
+  position:[55,78,24,24],
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,100],value:"Warning! Out of dodge area!",color:"rgba(255, 0, 0, 1)"},
+    { type: "text",position:[0,15,100,100],value:"You will gain 5 points if you go farther!",color:"rgba(255, 0, 0, 1)"},
+  ]
+};
+
+let playerWait = {
+  id:"playerWait",
+  position:[40,30,24,12],
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,100],value:"Waiting for more players...",color:"rgba(255, 255, 255, 1)"},
+  ]
+};
+
+let gameStart = {
+  id:"gameStart",
+  position:[40,30,24,12],
+  visible: true,
+  components: [
+    { type: "text",position:[0,0,100,100],value:"The game is starting",color:"rgba(255, 255, 255, 1)"},
+  ]
+};
+
+function secondsCalc(){
+  if(timeLeft-Math.floor(timeLeft/60)*60 >= 10){
+    return timeLeft-Math.floor(timeLeft/60)*60;
+  } else {
+    return `0${timeLeft-Math.floor(timeLeft/60)*60}`;
+  }
+}
+
+let fireRate = 1;
+let timeLeft = gameLength*60;
+function timerGo(){
+  for(let ship of game.ships){
+    ship.custom.score--;
+    ship.setUIComponent({
+      id:"timer",
+      position:[40,15,24,10],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,100],value:`Time left - ${Math.floor(timeLeft/60)}:${secondsCalc()}`,color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+    ship.setUIComponent({
+      id:"score",
+      position:[55,1,24,12],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,50],value:"Low score wins -",color:"rgba(255, 255, 255, 1)"},
+        { type: "text",position:[0,40,100,50],value:`Your score: ${ship.custom.score}`,color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+  }
+  leaderFunc();
+  timeLeft--;
+  if(timeLeft<0){
+    gameOver();
+  }
+  if(timeLeft%30===0 && fireRate > 0.4){
+    fireRate -= 0.1;
+    fireRate = fireRate.toFixed(1);
+  }
+}
+
+let leaderG = "";
+function leaderFunc(){
+  let leader = game.ships[0];
+  for(let ship of game.ships){
+    if(ship.custom.score<leader.custom.score){
+      leader = ship;
+      leaderG = ship;
+    }
+  }
+  for(let ship of game.ships){
+    ship.setUIComponent({
+      id:"leader",
+      position:[31,1,24,12],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,50],value:`Current leader - ${leader.name}`,color:"rgba(255, 255, 255, 1)"},
+        { type: "text",position:[0,40,100,50],value:`with ${leader.custom.score} points`,color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+  }
+}
+
+function scoreFunc(ship){
+  ship.custom.score+=5;
+  leaderFunc();
+  ship.setUIComponent({
+    id:"score",
+    position:[55,1,24,12],
+    visible: true,
+    components: [
+      { type: "text",position:[0,0,100,50],value:"Low score wins -",color:"rgba(255, 255, 255, 1)"},
+      { type: "text",position:[0,40,100,50],value:`Your score: ${ship.custom.score}`,color:"rgba(255, 255, 255, 1)"},
+    ]
+  });
+}
+
+function outCheck(){
+  for(let ship of game.ships){
+    if(ship.y > 20 || ship.y < -20){
+      ship.setUIComponent(warning);
+      if(ship.y > 35 || ship.y < -35){
+        ship.set({collider:false,y:0,vx:0,vy:0,x:Math.floor(Math.random() * 36) * (Math.round(Math.random()) ? 1 : -1)});
+        scoreFunc(ship);
+        setTimeout( () => {
+          ship.set({collider:true});
+        }, 1000);
+      }
+    } else {
+      ship.setUIComponent({
+        id: "warning",
+        visible: false
+      });
+    }
+    if(ship.x > 37 || ship.x < -37){
+      ship.set({x:Math.floor(Math.random() * 36) * (Math.round(Math.random()) ? 1 : -1)});
+    }
+  }
+}
+
+let objNum = 0;
+function go(){
+  let thisObj = `arrow_${objNum}`;
+  let x = Math.floor(Math.random() * 36) * (Math.round(Math.random()) ? 1 : -1);
+  game.setObject({
+    id: thisObj,
+    type: arrow,
+    position: {x:x,y:0,z:-2},
+    rotation: {x:135,y:0,z:0},
+    scale: {x:10,y:10.6,z:1}
+  });
+  for(let i=0;i<5;i++){
+    game.addAsteroid({size:30,y:100,x:x,vy:-2});
+  }
+  setTimeout( () => {
+    game.removeObject(thisObj);
+  }, 2000);
+}
+
+function gameStartFunc(){
+  leaderFunc();
+  for(let ship of game.ships){
+    ship.setUIComponent({
+      id:"score",
+      position:[55,1,24,12],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,50],value:"Low score wins -",color:"rgba(255, 255, 255, 1)"},
+        { type: "text",position:[0,40,100,50],value:`Your score: ${ship.custom.score}`,color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+    //hide the waiting for players UI
+    ship.setUIComponent({
+      id: "playerWait",
+      visible: false
+    });
+    //show the "The games starting" UI
+    ship.setUIComponent(gameStart);
+    //un-idle the ships
+    ship.set({idle:false});
+  }
+  
+  //wait 2 seconds then remove the "The game is starting" UI
+  setTimeout( () => {
+    for(let ship of game.ships){
+      ship.setUIComponent({
+        id: "gameStart",
+        visible: false
+      });
+    }
+  }, 2000);
+  //wait another 2 seconds then start the asteroids
+  setTimeout( () => {
+    gameOn = true;
+  }, 4000);
+}
+
+function gameStopFunc(){
+  fireRate = 1;
+  timeLeft = gameLength*60;
+  gameOn = false;
+  for(let ship of game.ships){
+    //when the game stops and everyone goes idle, this make sure that no one is outside of the dodge area
+    if(ship.y > 20 || ship.y < -20){
+      ship.set({y:0});
+    }
+    ship.custom.score = 500;
+    ship.set({type:505,idle:true,vx:0,vy:0});
+    ship.setUIComponent(playerWait);
+    ship.setUIComponent({
+      id: "score",
+      visible: false
+    });
+    ship.setUIComponent({
+      id: "leader",
+      visible: false
+    });
+    ship.setUIComponent({
+      id: "timer",
+      visible: false
+    });
+    ship.setUIComponent({
+      id: "over",
+      visible: false
+    });
+  }
+}
+
+function gameOver(){
+  let score = leaderG.custom.score;
+  gameStopFunc();
+  for(let ship of game.ships){
+    ship.setUIComponent({
+      id: "playerWait",
+      visible: false
+    });
+    ship.setUIComponent({
+      id:"over",
+      position:[32,25,30,20],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,75],value:"Time's up!",color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+    setTimeout( () => {
+      ship.setUIComponent({
+        id:"over",
+        position:[30,25,40,24],
+        visible: true,
+        components: [
+          { type: "text",position:[0,0,100,50],value:"This round has been won by -",color:"rgba(255, 255, 255, 1)"},
+          { type: "text",position:[0,40,100,50],value:`${leaderG.name} with ${score} points`,color:"rgba(255, 255, 255, 1)"},
+        ]
+      });
+    }, 2500);
+    setTimeout( () => {
+      ship.setUIComponent({
+        id:"over",
+        position:[30,25,40,24],
+        visible: true,
+        components: [
+          { type: "text",position:[0,0,100,100],value:"New round starting",color:"rgba(255, 255, 255, 1)"},
+        ]
+      });
+    }, 7500);
+    setTimeout( () => {
+      ship.setUIComponent({
+        id:"over",
+        visible: false,
+      });
+      gameStartFunc();
+    }, 10000);
+  }
+}
+
+function newPlayerSetup(ship){
+  ship.custom.score = 500;
+  if(gameOn){
+    ship.set({x:Math.floor(Math.random() * 36) * (Math.round(Math.random()) ? 1 : -1),y:0,stats:88888888});
+    leaderFunc();
+    ship.setUIComponent({
+      id:"score",
+      position:[55,1,24,12],
+      visible: true,
+      components: [
+        { type: "text",position:[0,0,100,50],value:"Low score wins -",color:"rgba(255, 255, 255, 1)"},
+        { type: "text",position:[0,40,100,50],value:`Your score: ${ship.custom.score}`,color:"rgba(255, 255, 255, 1)"},
+      ]
+    });
+  } else {
+    gameStopFunc();
+  }
+  if(game.ships.length>=2 && !gameOn){
+    gameStartFunc();
+  }
+}
+
+this.tick = function(game) {
+  if(game.step%60===0){
+    //remove asteroids after they fly past a certain point
+    for(let asteroid of game.asteroids){
+      if(asteroid.y<-60){
+        asteroid.set({size:1,kill:true});
+      }
+    }
+    
+    if(gameOn){
+      outCheck();
+      timerGo();
+    } else {
+      for(let ship of game.ships){
+        ship.set({vx:0,vy:0});
+      }
+    }
+    
+    if(game.ships.length<2 && gameOn){
+      gameStopFunc();
+    }
+  }
+  if(game.step%(fireRate*60)===0){
+    if(gameOn){
+      go();
+    }
+  }
+};
+
+this.event = function(event, game) {
+  switch (event.name) {
+    case "ship_spawned":
+      newPlayerSetup(event.ship);
+      break;
+    case "ship_destroyed":
+      if(game.ships.indexOf(event.ship)<=1){
+        gameStopFunc();
+      }
+      break;
+  }
+};
+
+changeRate = function(newRate){
+  fireRate = newRate;
+}
+
