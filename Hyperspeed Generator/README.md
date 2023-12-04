@@ -13,7 +13,7 @@ For reference, an A-Speedster moves at a max speed of 4.6vu (velocity units), an
 
 ![WOWspeed](https://github.com/seaweed32/Starblast-Mods/assets/132213277/f7a04d93-b01a-4c38-8be7-277b4945a5e5)
 
-9.9e+231 is roughly nine hundred quinseptuagintillion, or 900,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,
+9.9e+231vu is roughly nine hundred quinseptuagintillion, or 900,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000vu,
 so quite a bit faster than the X-3!
 
 ### Glitched lasers
