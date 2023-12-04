@@ -10,9 +10,9 @@ The lowest score wins, and every time you get hit out of the arena you gain a po
 \
 ![original GH](https://github.com/seaweed32/Starblast-Mods/assets/132213277/74a7881f-2752-48cf-a310-59f88f6bf0c3)
 ## v2
-In v2 you you can only set the length of the rounds. This is because there is no max player limit, and the game starts at 2 players. 
+In v2 you can only set the length of the rounds. This is because there is no max player limit, and the game starts at 2 players. 
 You start the game with 500 points, and every second you loose a point. This is good because the lowest score wins. You gain 5 points if you get hit out of the arena.
-Also, the rate of fire of the asteroids decreases (or does it increases? idk but it gets faster) by 0.1 second every 30 seconds. 
+Also, the rate of fire of the asteroids decreases (or does it increase? idk but it gets faster) by 0.1 second every 30 seconds. 
 Plus there's emotes in it. Really v2 is just better but I thought I should at least add the original since you can change the ROF.
 \
 \
