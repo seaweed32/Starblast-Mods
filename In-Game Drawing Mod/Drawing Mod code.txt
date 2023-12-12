@@ -20,12 +20,14 @@ let startingShape = "circle";
 let shapeShortcut = "H";
 
 //these two arrays must start and end with the same value
-const colors = ["white","black","red","orange","yellow","green","cyan","blue","purple","pink","white"];
-const shapes = ["circle","square","star","triangle","circle"];
+const colors = ["white","grey","black","brown","red","orange","yellow","green","cyan","blue","purple","pink","white"];
+const shapes = ["circle","square","star","triangle","heart","circle"];
 
 const hexColors = {
   "white":0xFFFFFF,
+  "grey":0x777777,
   "black":0x000000,
+  "brown":0x804500,
   "red":0xFF0000,
   "orange":0xFF8800,
   "yellow":0xFFFF00,
@@ -135,6 +137,7 @@ this.options = {
   max_level: 4,
   vocabulary: vocabulary,
   weapons_store: false,
+  invulnerable_ships: true
 };
 
 this.tick = function(game) {
@@ -193,36 +196,36 @@ this.event = function(event, game) {
 
 function draw(ship){
   if(!banList.includes(ship.name)){
-  game.setObject({
-    id: `${ship.id}_${ship.custom.drawNum}`,
-    type:{
-      id: `${ship.custom.color}_${ship.custom.shape}`,
-      obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
-      emissive: `https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/Draw-mod%20shapes/${ship.custom.shape}-draw.png`,
-      emissiveColor: hexColors[ship.custom.color],
-      transparent:true,
-    },
-    position: {x:ship.x,y:ship.y,z:-5},
-    rotation: {x:0,y:0,z:0},
-    scale: {x:ship.custom.size,y:ship.custom.size,z:1}
-  });
-  ship.custom.drawNum++;
+    game.setObject({
+      id: `${ship.id}_${ship.custom.drawNum}`,
+      type:{
+        id: `${ship.custom.color}_${ship.custom.shape}`,
+        obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
+        emissive: `https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/Draw-mod%20shapes/${ship.custom.shape}-draw.png`,
+        emissiveColor: hexColors[ship.custom.color],
+        transparent:true,
+      },
+      position: {x:ship.x,y:ship.y,z:-5},
+      rotation: {x:0,y:0,z:180*(Math.PI/180)},
+      scale: {x:ship.custom.size,y:ship.custom.size,z:1}
+    });
+    ship.custom.drawNum++;
   }
 }
 
 clear = function(ship){
   ship.custom.canDraw = false;
-  for(let i=0;i<ship.custom.drawNum;i++){
+  for(let i=ship.custom.drawNum-1;i>=0;i--){
     game.removeObject(`${ship.id}_${i}`);
   }
   ship.custom.drawNum = 0;
   ship.custom.canDraw = true;
-}
+};
 
 function undo(ship){
   ship.custom.canDraw = false;
-  game.removeObject(`${ship.id}_${ship.custom.drawNum}`);
   ship.custom.drawNum--;
+  game.removeObject(`${ship.id}_${ship.custom.drawNum}`);
   ship.custom.canDraw = true;
 }
 
