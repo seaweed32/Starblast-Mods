@@ -20,22 +20,23 @@ let startingShape = "circle";
 let shapeShortcut = "H";
 
 //these two arrays must start and end with the same value
-const colors = ["white","grey","black","brown","red","orange","yellow","green","cyan","blue","purple","pink","white"];
+const colors = ["white","grey","black","brown","red","orange","yellow","green","cyan","blue","purple","pink","random","white"];
 const shapes = ["circle","square","star","triangle","heart","circle"];
 
 const hexColors = {
-  "white":0xFFFFFF,
-  "grey":0x777777,
-  "black":0x000000,
-  "brown":0x804500,
-  "red":0xFF0000,
-  "orange":0xFF8800,
-  "yellow":0xFFFF00,
-  "green":0x00FF00,
-  "cyan":0x00FFFF,
-  "blue":0x0000FF,
-  "purple":0xBB00FF,
-  "pink":0xFF00FF
+  "white":()=> 0xFFFFFF,
+  "grey":()=> 0x777777,
+  "black":()=> 0x000000,
+  "brown":()=> 0x804500,
+  "red":()=> 0xFF0000,
+  "orange":()=> 0xFF8800,
+  "yellow":()=> 0xFFFF00,
+  "green":()=> 0x00FF00,
+  "cyan":()=> 0x00FFFF,
+  "blue":()=> 0x0000FF,
+  "purple":()=> 0xBB00FF,
+  "pink":()=> 0xFF00FF,
+  "random":()=> hexColors[colors[Math.floor(Math.random()*colors.length)]]()
 };
 
 var vocabulary = [
@@ -199,10 +200,10 @@ function draw(ship){
     game.setObject({
       id: `${ship.id}_${ship.custom.drawNum}`,
       type:{
-        id: `${ship.custom.color}_${ship.custom.shape}`,
+        id: `${hexColors[ship.custom.color]()}_${ship.custom.shape}`,
         obj: "https://starblast.data.neuronality.com/mods/objects/plane.obj",
         emissive: `https://raw.githubusercontent.com/seaweed32/Starblast-3d-images/main/Draw-mod%20shapes/${ship.custom.shape}-draw.png`,
-        emissiveColor: hexColors[ship.custom.color],
+        emissiveColor: hexColors[ship.custom.color](),
         transparent:true,
       },
       position: {x:ship.x,y:ship.y,z:-5},
@@ -247,7 +248,6 @@ function size(ship){
     ]
   });
 }
-
 
 function color(ship){
   ship.custom.color = colors[colors.indexOf(ship.custom.color)+1];
